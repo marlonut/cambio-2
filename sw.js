@@ -1,4 +1,4 @@
-import { updateCacheDynamic } from "./js/sw-utils";
+import { updateCacheDynamic } from "./js/sw-utils.js";
 const STATIC__CACHE = "static-v1";
 const DYNAMIC__CACHE = "dynamic-v1";
 const IMMUTABLE__CACHE = "immutable-v1";

@@ -3,7 +3,7 @@
 const App = {
   SW:null,
   init:()=>{
-    navigator.serviceWorker.register("./sw.js").then(swReg=>{
+    navigator.serviceWorker.register("./sw.js",{type:"module"}).then(swReg=>{
       App.SW=swReg.active||swReg.waiting||swReg.installing
       console.log(App.SW);
     })

@@ -30,3 +30,10 @@ self.addEventListener("install", (e) => {
   });
   e.waitUntil(Promise.all([cacheStatic, cacheImmutable]));
 });
+self.addEventListener("fetch", function (e) {
+  e.respondWith(
+    caches.match(e.request).then(function (response) {
+      return response || fetch(e.request);
+    })
+  );
+});

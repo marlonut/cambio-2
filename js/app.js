@@ -5,10 +5,10 @@ const App = {
   init:()=>{
     navigator.serviceWorker.register("./sw.js",{type:"module"}).then(swReg=>{
       App.SW=swReg.active||swReg.waiting||swReg.installing
-      console.log(App.SW);
+      // console.log(App.SW);
     })
     navigator.serviceWorker.getRegistrations().then(register=>{
-      console.log(register);
+      // console.log(register);
     })
     navigator.serviceWorker.addEventListener("controllerchange",e=>{
       console.log("update service worker at new version");

@@ -2,8 +2,7 @@ import { updateCacheDynamic } from "./js/sw-utils.js";
 const STATIC__CACHE = "static-v1";
 const DYNAMIC__CACHE = "dynamic-v1";
 const IMMUTABLE__CACHE = "immutable-v1";
-let deferredPrompt;
-const addBtn=document.querySelector(".add-button");
+
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -65,24 +64,3 @@ self.addEventListener("fetch", (e) => {
   });
   e.respondWith(request);
 });
-document.addEventListener("DOMContentLoaded",()=>{
-  addBtn.classList.add("add-button--show");
-})
-window.addEventListener("beforeinstallprompt",(e)=>{
-  e.preventDefault();
-  deferredPrompt=e;
-  addBtn.classList.remove("add-button--show");
-
-});
-addBtn.addEventListener("click",()=>{
-  addBtn.classList.add("add-button--show");
- deferredPrompt.prompt();
- deferredPrompt.userChoice.then((choiceResult)=>{
-   if(choiceResult.outcome==="accepted"){
-     alert("User accepted the A2HS prompt");
-   }else{
-      alert("User dismissed the A2HS prompt")
-   }
-   deferredPrompt=null;
- });
-})

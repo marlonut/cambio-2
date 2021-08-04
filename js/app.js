@@ -1,5 +1,8 @@
 //serviceWorker
 
+const addBtn = document.querySelector(".add-button");
+let deferredPrompt;
+
 const App = {
   SW:null,
   init:()=>{
@@ -127,3 +130,25 @@ postBtn.on("click", function () {
 
   crearMensajeHTML(mensaje, usuario);
 });
+
+document.addEventListener("DOMContentLoaded",()=>{
+  addBtn.classList.add("add-button--show");
+})
+window.addEventListener("beforeinstallprompt",(e)=>{
+  e.preventDefault();
+  deferredPrompt=e;
+  addBtn.classList.remove("add-button--show");
+
+});
+addBtn.addEventListener("click",()=>{
+  addBtn.classList.add("add-button--show");
+ deferredPrompt.prompt();
+ deferredPrompt.userChoice.then((choiceResult)=>{
+   if(choiceResult.outcome==="accepted"){
+     alert("User accepted the A2HS prompt");
+   }else{
+      alert("User dismissed the A2HS prompt")
+   }
+   deferredPrompt=null;
+  })
+ });
